@@ -32,7 +32,7 @@ public sealed class BillingRecordTests
     {
         var record = CreateValidRecord();
         record.DomainEvents.Should().ContainSingle()
-              .Which.Should().BeOfType<MyApp.Domain.Entities.BillingRecordIngested>();
+              .Which.Should().BeOfType<MyApp.Domain.Events.BillingRecordIngested>();
     }
 
     [Fact]

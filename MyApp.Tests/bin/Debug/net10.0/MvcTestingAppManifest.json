@@ -1,0 +1,6 @@
+{
+  "MyApp.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Api",
+  "MyApp.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Application",
+  "MyApp.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Domain",
+  "MyApp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure"
+}

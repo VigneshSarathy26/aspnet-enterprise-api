@@ -8,6 +8,7 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
 using System.Threading.RateLimiting;
+using Microsoft.EntityFrameworkCore;
 
 // ── Bootstrap Serilog early ──────────────────────────────────────────────────
 Log.Logger = new LoggerConfiguration()
@@ -114,8 +115,7 @@ try
         .WithTracing(t =>
         {
             t.AddAspNetCoreInstrumentation()
-             .AddHttpClientInstrumentation()
-             .AddEntityFrameworkCoreInstrumentation(o => o.SetDbStatementForText = true);
+             .AddHttpClientInstrumentation();
             if (!string.IsNullOrEmpty(otlpEndpoint))
                 t.AddOtlpExporter(o => o.Endpoint = new Uri(otlpEndpoint));
         })
@@ -182,3 +182,5 @@ finally
 {
     await Log.CloseAndFlushAsync();
 }
+
+public partial class Program { }
