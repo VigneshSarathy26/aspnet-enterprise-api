@@ -1,0 +1,1 @@
+// GetUserQuery - MediatR IRequest query

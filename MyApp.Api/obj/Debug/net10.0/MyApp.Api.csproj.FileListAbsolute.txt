@@ -1,0 +1,9 @@
+D:\Repositories\aspnet-enterprise-api\MyApp.Api\obj\Debug\net10.0\MyApp.Api.csproj.AssemblyReference.cache
+D:\Repositories\aspnet-enterprise-api\MyApp.Api\obj\Debug\net10.0\rpswa.dswa.cache.json
+D:\Repositories\aspnet-enterprise-api\MyApp.Api\obj\Debug\net10.0\MyApp.Api.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repositories\aspnet-enterprise-api\MyApp.Api\obj\Debug\net10.0\MyApp.Api.AssemblyInfoInputs.cache
+D:\Repositories\aspnet-enterprise-api\MyApp.Api\obj\Debug\net10.0\MyApp.Api.AssemblyInfo.cs
+D:\Repositories\aspnet-enterprise-api\MyApp.Api\obj\Debug\net10.0\MyApp.Api.csproj.CoreCompileInputs.cache
+D:\Repositories\aspnet-enterprise-api\MyApp.Api\obj\Debug\net10.0\MyApp.Api.MvcApplicationPartsAssemblyInfo.cs
+D:\Repositories\aspnet-enterprise-api\MyApp.Api\obj\Debug\net10.0\MyApp.Api.MvcApplicationPartsAssemblyInfo.cache
+D:\Repositories\aspnet-enterprise-api\MyApp.Api\obj\Debug\net10.0\MyApp.Api.sourcelink.json

@@ -1,0 +1,16 @@
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\MyApp.Application.csproj.AssemblyReference.cache
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\MyApp.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\MyApp.Application.AssemblyInfoInputs.cache
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\MyApp.Application.AssemblyInfo.cs
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\MyApp.Application.csproj.CoreCompileInputs.cache
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\MyApp.Application.sourcelink.json
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\bin\Debug\net10.0\MyApp.Application.deps.json
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\bin\Debug\net10.0\MyApp.Application.dll
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\bin\Debug\net10.0\MyApp.Application.pdb
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\bin\Debug\net10.0\MyApp.Domain.dll
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\bin\Debug\net10.0\MyApp.Domain.pdb
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\MyApp.Ap.B540CA8A.Up2Date
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\MyApp.Application.dll
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\refint\MyApp.Application.dll
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\MyApp.Application.pdb
+D:\Repositories\aspnet-enterprise-api\MyApp.Application\obj\Debug\net10.0\ref\MyApp.Application.dll

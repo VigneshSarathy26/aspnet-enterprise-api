@@ -1,0 +1,8 @@
+D:\Repositories\aspnet-enterprise-api\MyApp.Tests\bin\Debug\net10.0\.msCoverageSourceRootsMapping_MyApp.Tests
+D:\Repositories\aspnet-enterprise-api\MyApp.Tests\bin\Debug\net10.0\CoverletSourceRootsMapping_MyApp.Tests
+D:\Repositories\aspnet-enterprise-api\MyApp.Tests\obj\Debug\net10.0\MyApp.Tests.csproj.AssemblyReference.cache
+D:\Repositories\aspnet-enterprise-api\MyApp.Tests\obj\Debug\net10.0\MyApp.Tests.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repositories\aspnet-enterprise-api\MyApp.Tests\obj\Debug\net10.0\MyApp.Tests.AssemblyInfoInputs.cache
+D:\Repositories\aspnet-enterprise-api\MyApp.Tests\obj\Debug\net10.0\MyApp.Tests.AssemblyInfo.cs
+D:\Repositories\aspnet-enterprise-api\MyApp.Tests\obj\Debug\net10.0\MyApp.Tests.csproj.CoreCompileInputs.cache
+D:\Repositories\aspnet-enterprise-api\MyApp.Tests\obj\Debug\net10.0\MyApp.Tests.sourcelink.json
