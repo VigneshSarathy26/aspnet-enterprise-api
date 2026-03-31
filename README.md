@@ -1,10 +1,14 @@
-# Cloud Billing Telemetry Microservice
+# ☁️ Cloud Billing Telemetry Microservice
 
-> **Enterprise-grade ASP.NET Core 10 microservice** that ingests, normalizes, and serves cloud billing telemetry from AWS, Azure, and GCP — built on Clean Architecture with CQRS, MediatR, EF Core 9, Redis, and full observability.
+[![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet&logoColor=white)](#)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](#)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](#)
+
+> **Enterprise-grade ASP.NET Core 10 microservice** that ingests, normalizes, and serves cloud billing telemetry from AWS, Azure, and GCP. Built on **Clean Architecture** patterns utilizing CQRS, MediatR, EF Core 9, Redis, and comprehensive observability integrations.
 
 ---
 
-## Architecture
+## 🏗 Architecture
 
 ```mermaid
 flowchart TD
@@ -38,87 +42,98 @@ flowchart TD
     end
 ```
 
-## Tech Stack
+## 🛠 Tech Stack
 
-| Concern           | Technology                                |
-|-------------------|-------------------------------------------|
-| API Framework     | ASP.NET Core 10 (`net10.0`)               |
-| CQRS / Events     | MediatR 12                                |
-| ORM               | EF Core 9 + Npgsql (PostgreSQL)           |
-| Caching           | Redis (StackExchange.Redis)               |
-| Validation        | FluentValidation 11                       |
-| Mapping           | Mapster 7.4                               |
-| Auth              | JWT Bearer                                |
-| Rate Limiting     | ASP.NET Core Built-in                     |
-| Logging           | Serilog (Console + Seq)                   |
-| Observability     | OpenTelemetry → Jaeger + Prometheus       |
-| Testing           | xUnit + Moq + FluentAssertions            |
-| Containerization  | Docker + Docker Compose + Testcontainers  |
+| Concern           | Technology                                  |
+|-------------------|---------------------------------------------|
+| **API Framework** | ASP.NET Core 10 (`net10.0`)                 |
+| **CQRS / Events** | MediatR 12                                  |
+| **ORM**           | EF Core 9 + Npgsql (PostgreSQL)             |
+| **Caching**       | Redis (StackExchange.Redis)                 |
+| **Validation**    | FluentValidation 11                         |
+| **Mapping**       | Mapster 7.4                                 |
+| **Auth**          | JWT Bearer                                  |
+| **Rate Limiting** | ASP.NET Core Built-in Rate Limiting         |
+| **Logging**       | Serilog (Console + Seq sync)                |
+| **Observability** | OpenTelemetry → Jaeger + Prometheus         |
+| **Testing**       | xUnit + Moq + FluentAssertions              |
+| **Deployment**    | Docker + Docker Compose + Testcontainers    |
 
-## Supported Cloud Providers
+## 🌍 Supported Cloud Providers
 
-| Provider | Billing Format                    |
-|----------|-----------------------------------|
-| **AWS**  | Cost and Usage Report (CUR) JSON  |
-| **Azure**| Cost Management Export JSON       |
-| **GCP**  | Billing Export (BigQuery JSON)    |
+| Provider  | Billing Format                   | Status  |
+|-----------|----------------------------------|---------|
+| **AWS**   | Cost and Usage Report (CUR) JSON | ✅ Ready |
+| **Azure** | Cost Management Export JSON      | ✅ Ready |
+| **GCP**   | Billing Export (BigQuery JSON)   | ✅ Ready |
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
-### Local (Docker Compose) - Full Stack
+### Prerequisites
+- **Docker Desktop** / **Docker Daemon** (v20.10+)
+- **.NET 10 SDK** (If running locally instead of Docker)
 
-The easiest way to run the entire backend with all dependencies (PostgreSQL, Redis, Jaeger, Prometheus, Grafana).
+### Option A: Local Full Stack (Docker Compose) - *Recommended*
+
+The easiest way to run the entire backend with all dependencies out-of-the-box (PostgreSQL, Redis, Jaeger, Prometheus, Grafana).
 
 ```bash
-# 1. Start all services in the background
-docker compose up -d
+# 1. Start all services in the background mode
+docker compose up -d --build
 
-# 2. Monitor startup
+# 2. Monitor startup logs
 docker compose logs -f api
-
-# 3. View Interfaces
-# Swagger UI        : http://localhost:8080/swagger
-# Jaeger Tracing    : http://localhost:16686
-# Prometheus Metrics: http://localhost:9090
-# Grafana Dashboards: http://localhost:3000 (admin / admin)
 ```
 
-### Local Development (dotnet SDK)
+#### 🌐 Port Mappings & Interfaces
 
-If you prefer to run the .NET app natively on your host machine while keeping databases in Docker container:
+Once the stack is spun up, the following services will be available:
+
+| Service               | Interface / Endpoint                   | Credentials       |
+|-----------------------|----------------------------------------|-------------------|
+| **API Swagger UI**    | [http://localhost:8080/swagger](http://localhost:8080/swagger) | -                 |
+| **Jaeger Tracing**    | [http://localhost:16686](http://localhost:16686)        | -                 |
+| **Prometheus Metrics**| [http://localhost:9090](http://localhost:9090)          | -                 |
+| **Grafana Dashboards**| [http://localhost:3000](http://localhost:3000)          | `admin` / `admin` |
+| **PostgreSQL DB**     | `localhost:5432`                       | `billing_user` / `billing_pass` |
+| **Redis Cache**       | `localhost:6379`                       | -                 |
+
+### Option B: Local Native Development (dotnet SDK)
+
+If you prefer to run the .NET app natively on your host machine but keep the infrastructure dependencies in docker containers:
 
 ```bash
-# 1. Install prerequisites: .NET 10 SDK and Docker Desktop
-# 2. Spin up just the infrastructure services without the API:
+# 1. Spin up just the infrastructure services without the API:
 docker compose up -d postgres redis jaeger prometheus grafana
 
-# 3. Configure local environment variables
+# 2. Configure local environment variables
 cp .env.example .env
 
-# 4. Restore dependencies and run migrations
+# 3. Restore dependencies and run migrations
 cd MyApp.Api
 dotnet restore
 dotnet ef database update --project ../MyApp.Infrastructure
 
-# 5. Run the API locally
+# 4. Run the API locally
 dotnet run
 # The API will automatically pick up connections to localhost:5432 (PG) and localhost:6379 (Redis)
 ```
 
 ---
 
-## API Reference
+## 📡 API Reference
 
-### Ingestion Endpoints
+### 📥 Ingestion Endpoints
 
-| Method | Path                        | Description                    |
-|--------|-----------------------------|--------------------------------|
-| `POST` | `/api/v1/billing/ingest`    | Ingest a single billing record |
-| `POST` | `/api/v1/billing/ingest/batch` | Ingest up to 1000 records   |
+| Method | Path                           | Description                               |
+|--------|--------------------------------|-------------------------------------------|
+| `POST` | `/api/v1/billing/ingest`       | Ingest a single billing record            |
+| `POST` | `/api/v1/billing/ingest/batch` | Ingest a batch (up to 1,000 records)      |
 
-#### Single Ingest — Example Request (AWS)
+<details>
+<summary><b>View Example Request (AWS Single Ingest)</b></summary>
 
 ```json
 POST /api/v1/billing/ingest
@@ -140,31 +155,30 @@ Content-Type: application/json
   }
 }
 ```
+</details>
 
-### Query Endpoints
+### 🔍 Query Endpoints
 
-| Method | Path                        | Description                         |
-|--------|-----------------------------|-------------------------------------|
-| `GET`  | `/api/v1/billing/records`   | Paginated list with filters         |
-| `GET`  | `/api/v1/billing/aggregate` | Cost aggregation over a time period |
+| Method | Path                           | Description                               |
+|--------|--------------------------------|-------------------------------------------|
+| `GET`  | `/api/v1/billing/records`      | Paginated list with extensive filters     |
+| `GET`  | `/api/v1/billing/aggregate`    | Cost aggregation over a specified period  |
 
 #### Query Records — Example
-
-```
+```http
 GET /api/v1/billing/records?accountId=123456789012&provider=AWS&from=2024-01-01&page=1&pageSize=50
 ```
 
 #### Aggregate — Example
-
-```
+```http
 GET /api/v1/billing/aggregate?accountId=123456789012&from=2024-01-01&to=2024-02-01
 ```
 
 ---
 
-## Running Tests
+## 🧪 Testing
 
-The test suite covers Unit, Integration, and End-to-End flows.
+The solution is covered by an extensive test suite divided into Unit, Integration, and E2E flows.
 
 ```bash
 # 1. Run all tests in the solution
@@ -179,15 +193,15 @@ dotnet test --filter "Category=Unit"
 # the E2E tests execute successfully across CI/CD and environments without Docker.
 dotnet test MyApp.Tests/MyApp.Tests.csproj --filter "FullyQualifiedName~E2E"
 
-# 4. Generate coverage reports
+# 4. Generate Code Coverage reports
 dotnet test --collect:"XPlat Code Coverage"
 ```
 
 ---
 
-## EF Core Migrations
+## 🗄 EF Core Migrations
 
-If you make changes to the domain entities, generate and apply a new migration:
+If you make any schema changes to the `MyApp.Domain` entities, generate and apply a new migration using the cross-project CLI method:
 
 ```bash
 cd MyApp.Api
@@ -197,19 +211,21 @@ dotnet ef database update
 
 ---
 
-## Observability
+## 📊 Observability & Monitoring
 
-- **Traces** → Jaeger at `http://localhost:16686`
-- **Metrics** → Prometheus scrapes `/metrics`; Grafana at `:3000`
-- **Logs** → Serilog structured JSON; optionally ship to Seq at `:5341`
-- **Health** → `GET /health` (checks PostgreSQL + Redis)
-- **Correlation IDs** → Every request tagged with `X-Correlation-Id`
+The microservice includes rich monitoring out-of-the-box leveraging OpenTelemetry standards:
+
+- **Distributed Traces** → View traces and spans in Jaeger at `http://localhost:16686`
+- **Application Metrics** → Prometheus scrapes `/metrics` automatically; visualize your golden signals in Grafana at `:3000`
+- **Structured Logs** → Provided by Serilog. Preconfigured to output JSON; optionally ship to Seq at `:5341`
+- **Health Checks** → Monitored actively via `GET /health` API endpoint (ensures connectivity to both PostgreSQL and Redis)
+- **Correlation** → Every inbound API request is rigorously tracked via `X-Correlation-Id` across all logs and traces.
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
-```
+```text
 aspnet-enterprise-api/
 ├── MyApp.Api/                     # ASP.NET Core Web host
 │   ├── Controllers/               # Ingestion + Query endpoints
@@ -241,7 +257,13 @@ aspnet-enterprise-api/
 │   └── E2E/                       # WebApplicationFactory API testing
 ├── infra/
 │   └── prometheus.yml
-├── Dockerfile                     # Multi-stage production build
+├── Dockerfile                     # Multi-stage production build (Supports Linux AOT via ReadyToRun)
 ├── docker-compose.yml             # Full local dev stack
 └── .env.example
 ```
+
+---
+
+## 💡 Troubleshooting
+
+- **EF Core Missing Assembly in Docker**: If `Microsoft.EntityFrameworkCore.Relational.dll` throws `FileNotFoundException` inside Docker when publishing via `<PublishReadyToRun>`, re-run `docker compose up --build`. Explicit refs were added to the API root project to guarantee dependency copying across boundaries during Linux cross-compilation.

@@ -26,6 +26,9 @@
     <!-- Health Checks -->
     <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="9.0.0" />
     <PackageReference Include="AspNetCore.HealthChecks.Redis"  Version="9.0.0" />
+    <!-- EF Core (Explicitly required for Linux PublishReadyToRun to copy transitive dependencies) -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"    Version="9.0.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyApp.Application\MyApp.Application.csproj" />
