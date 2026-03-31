@@ -32,7 +32,7 @@ flowchart TD
     end
 
     subgraph External Infrastructure
-        DB[(PostgreSQL)]:::db
+        DB[(MS-SQL / Oracle / PG)]:::db
         CACHE[(Redis)]:::db
         OTEL{{OpenTelemetry<br/>Jaeger/Prometheus}}:::db
 
@@ -48,7 +48,7 @@ flowchart TD
 |-------------------|---------------------------------------------|
 | **API Framework** | ASP.NET Core 10 (`net10.0`)                 |
 | **CQRS / Events** | MediatR 12                                  |
-| **ORM**           | EF Core 9 + Npgsql (PostgreSQL)             |
+| **ORM**           | EF Core 9 (Multi-Provider: MS-SQL, Oracle, PostgreSQL) |
 | **Caching**       | Redis (StackExchange.Redis)                 |
 | **Validation**    | FluentValidation 11                         |
 | **Mapping**       | Mapster 7.4                                 |
@@ -97,8 +97,13 @@ Once the stack is spun up, the following services will be available:
 | **Jaeger Tracing**    | [http://localhost:16686](http://localhost:16686)        | -                 |
 | **Prometheus Metrics**| [http://localhost:9090](http://localhost:9090)          | -                 |
 | **Grafana Dashboards**| [http://localhost:3000](http://localhost:3000)          | `admin` / `admin` |
+| **MS-SQL Server**     | `localhost:1433`                       | `sa` / `YourStrong@Password` |
+| **Oracle DB**         | `localhost:1521`                       | `system` / `YourStrong@Password` |
 | **PostgreSQL DB**     | `localhost:5432`                       | `billing_user` / `billing_pass` |
 | **Redis Cache**       | `localhost:6379`                       | -                 |
+
+> [!NOTE] 
+> By default, the application is configured to run **Microsoft SQL Server**. To switch to Oracle or PostgreSQL, simply update the `DatabaseProvider` key in `appsettings.json` and optionally uncomment the respective container blocks inside `docker-compose.yml`.
 
 ### Option B: Local Native Development (dotnet SDK)
 
@@ -106,7 +111,7 @@ If you prefer to run the .NET app natively on your host machine but keep the inf
 
 ```bash
 # 1. Spin up just the infrastructure services without the API:
-docker compose up -d postgres redis jaeger prometheus grafana
+docker compose up -d mssql redis jaeger prometheus grafana
 
 # 2. Configure local environment variables
 cp .env.example .env
@@ -118,7 +123,7 @@ dotnet ef database update --project ../MyApp.Infrastructure
 
 # 4. Run the API locally
 dotnet run
-# The API will automatically pick up connections to localhost:5432 (PG) and localhost:6379 (Redis)
+# The API will automatically pick up connections to localhost:1433 (MS-SQL) and localhost:6379 (Redis)
 ```
 
 ---
@@ -201,11 +206,20 @@ dotnet test --collect:"XPlat Code Coverage"
 
 ## 🗄 EF Core Migrations
 
-If you make any schema changes to the `MyApp.Domain` entities, generate and apply a new migration using the cross-project CLI method:
+Because the solution uses a Multi-Provider Database approach, migrations must be sequestered natively into differing persistence folders per SQL Dialect. 
+
+If you make any schema changes to the `MyApp.Domain` entities, you must apply them explicitly against your active `DatabaseProvider` mapped in `appsettings.json` and generate an isolated artifact:
 
 ```bash
 cd MyApp.Api
-dotnet ef migrations add <YourMigrationName> --project ../MyApp.Infrastructure
+
+# For MS-SQL Server
+dotnet ef migrations add <YourMigrationName> --project ../MyApp.Infrastructure --output-dir Persistence/Migrations/SqlServer
+
+# For Oracle DB
+dotnet ef migrations add <YourMigrationName> --project ../MyApp.Infrastructure --output-dir Persistence/Migrations/Oracle
+
+# Apply natively
 dotnet ef database update
 ```
 
@@ -218,7 +232,7 @@ The microservice includes rich monitoring out-of-the-box leveraging OpenTelemetr
 - **Distributed Traces** → View traces and spans in Jaeger at `http://localhost:16686`
 - **Application Metrics** → Prometheus scrapes `/metrics` automatically; visualize your golden signals in Grafana at `:3000`
 - **Structured Logs** → Provided by Serilog. Preconfigured to output JSON; optionally ship to Seq at `:5341`
-- **Health Checks** → Monitored actively via `GET /health` API endpoint (ensures connectivity to both PostgreSQL and Redis)
+- **Health Checks** → Monitored actively via `GET /health` API endpoint (ensures connectivity to active Database Provider + Redis)
 - **Correlation** → Every inbound API request is rigorously tracked via `X-Correlation-Id` across all logs and traces.
 
 ---

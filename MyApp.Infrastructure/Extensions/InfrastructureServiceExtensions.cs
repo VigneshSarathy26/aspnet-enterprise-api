@@ -16,13 +16,38 @@ public static class InfrastructureServiceExtensions
         this IServiceCollection services,
         IConfiguration          configuration)
     {
-        // ── PostgreSQL / EF Core ───────────────────────────────────────────────
+        // ── Relational Database / EF Core ──────────────────────────────────
+        var provider = configuration["DatabaseProvider"] ?? "Postgres";
+
         services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(
-                configuration.GetConnectionString("Postgres"),
-                npgsql => npgsql
-                    .EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: null)
-                    .CommandTimeout(30)));
+        {
+            switch (provider)
+            {
+                case "SqlServer":
+                    options.UseSqlServer(
+                        configuration.GetConnectionString("SqlServer"),
+                        sql => sql.MigrationsAssembly("MyApp.Infrastructure")
+                                  .EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)
+                                  .CommandTimeout(30));
+                    break;
+
+                case "Oracle":
+                    options.UseOracle(
+                        configuration.GetConnectionString("Oracle"),
+                        oracle => oracle.MigrationsAssembly("MyApp.Infrastructure")
+                                        .CommandTimeout(30));
+                    break;
+
+                case "Postgres":
+                default:
+                    options.UseNpgsql(
+                        configuration.GetConnectionString("Postgres"),
+                        npgsql => npgsql.MigrationsAssembly("MyApp.Infrastructure")
+                                        .EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)
+                                        .CommandTimeout(30));
+                    break;
+            }
+        });
 
         // ── Redis ─────────────────────────────────────────────────────────────
         var redisConn = configuration.GetConnectionString("Redis")

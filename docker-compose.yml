@@ -11,35 +11,76 @@ services:
       - "8080:8080"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=billing_telemetry;Username=billing_user;Password=billing_pass"
+      DatabaseProvider: "SqlServer"
+      ConnectionStrings__SqlServer: "Server=mssql;Database=billing_telemetry;User Id=sa;Password=YourStrong@Password;TrustServerCertificate=True;"
+      # ConnectionStrings__Oracle: "Data Source=oracle:1521/FREEPDB1;User Id=SYSTEM;Password=YourStrong@Password;"
+      # ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=billing_telemetry;Username=billing_user;Password=billing_pass"
       ConnectionStrings__Redis: "redis:6379,abortConnect=false"
       OpenTelemetry__Endpoint: "http://jaeger:4317"
     depends_on:
-      postgres:
+      mssql:
         condition: service_healthy
+      # postgres:
+      #   condition: service_healthy
       redis:
         condition: service_healthy
     restart: unless-stopped
     networks: [billing-net]
 
-  # ── PostgreSQL ─────────────────────────────────────────────────────────────
-  postgres:
-    image: postgres:16-alpine
-    container_name: billing-postgres
+  # ── MS-SQL Server ──────────────────────────────────────────────────────────
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: billing-mssql
     environment:
-      POSTGRES_DB: billing_telemetry
-      POSTGRES_USER: billing_user
-      POSTGRES_PASSWORD: billing_pass
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong@Password"
+      MSSQL_PID: "Developer"
     ports:
-      - "5432:5432"
+      - "1433:1433"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mssql_data:/var/opt/mssql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U billing_user -d billing_telemetry"]
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'YourStrong@Password' -C -Q 'SELECT 1' || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
     networks: [billing-net]
+
+  # ── Oracle DB (Optional) ───────────────────────────────────────────────────
+  # oracle:
+  #   image: gvenzl/oracle-free:slim
+  #   container_name: billing-oracle
+  #   environment:
+  #     ORACLE_PASSWORD: "YourStrong@Password"
+  #   ports:
+  #     - "1521:1521"
+  #   volumes:
+  #     - oracle_data:/opt/oracle/oradata
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "echo 'SELECT 1 FROM DUAL;' | sqlplus system/YourStrong@Password@localhost:1521/FREEPDB1"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #   networks: [billing-net]
+
+  # ── PostgreSQL (Optional) ──────────────────────────────────────────────────
+  # postgres:
+  #   image: postgres:16-alpine
+  #   container_name: billing-postgres
+  #   environment:
+  #     POSTGRES_DB: billing_telemetry
+  #     POSTGRES_USER: billing_user
+  #     POSTGRES_PASSWORD: billing_pass
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U billing_user -d billing_telemetry"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #   networks: [billing-net]
 
   # ── Redis ──────────────────────────────────────────────────────────────────
   redis:
@@ -92,7 +133,9 @@ services:
     networks: [billing-net]
 
 volumes:
-  postgres_data:
+  mssql_data:
+  # oracle_data:
+  # postgres_data:
   redis_data:
   grafana_data:
 

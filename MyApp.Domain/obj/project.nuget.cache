@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LayrnQhlQ1I=",
+  "dgSpecHash": "QbToV251Hv4=",
   "success": true,
   "projectFilePath": "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Domain\\MyApp.Domain.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\vigne\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\10.0.2\\microsoft.netcore.app.runtime.linux-x64.10.0.2.nupkg.sha512",
-    "C:\\Users\\vigne\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\10.0.2\\microsoft.aspnetcore.app.runtime.linux-x64.10.0.2.nupkg.sha512",
-    "C:\\Users\\vigne\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\10.0.2\\microsoft.netcore.app.crossgen2.win-x64.10.0.2.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

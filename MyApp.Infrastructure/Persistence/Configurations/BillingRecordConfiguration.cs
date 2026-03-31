@@ -49,7 +49,7 @@ public sealed class BillingRecordConfiguration : IEntityTypeConfiguration<Billin
         b.Property(x => x.PeriodStart  ).HasColumnName("period_start").IsRequired();
         b.Property(x => x.PeriodEnd    ).HasColumnName("period_end").IsRequired();
         b.Property(x => x.Status       ).HasColumnName("status").HasConversion<string>().HasMaxLength(32).IsRequired();
-        b.Property(x => x.RawPayload   ).HasColumnName("raw_payload").HasColumnType("jsonb").IsRequired();
+        b.Property(x => x.RawPayload   ).HasColumnName("raw_payload").IsRequired();
         b.Property(x => x.CorrelationId).HasColumnName("correlation_id").HasMaxLength(64);
         b.Property(x => x.FailureReason).HasColumnName("failure_reason").HasMaxLength(1024);
         b.Property(x => x.CreatedAt    ).HasColumnName("created_at").IsRequired();
@@ -57,7 +57,6 @@ public sealed class BillingRecordConfiguration : IEntityTypeConfiguration<Billin
 
         b.Property(x => x.Tags)
          .HasColumnName("tags")
-         .HasColumnType("jsonb")
          .HasConversion(
              v => JsonSerializer.Serialize(v, JsonOpts),
              v => JsonSerializer.Deserialize<Dictionary<string, string>>(v, JsonOpts) ?? new());

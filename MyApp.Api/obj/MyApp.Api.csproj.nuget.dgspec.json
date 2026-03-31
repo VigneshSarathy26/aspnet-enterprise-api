@@ -29,8 +29,8 @@
               "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Application\\MyApp.Application.csproj": {
                 "projectPath": "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Application\\MyApp.Application.csproj"
               },
-              "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\MyApp.Infrastructure.csproj": {
-                "projectPath": "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\MyApp.Infrastructure.csproj"
+              "d:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\MyApp.Infrastructure.csproj": {
+                "projectPath": "d:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\MyApp.Infrastructure.csproj"
               }
             }
           }
@@ -55,7 +55,15 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
+            "AspNetCore.HealthChecks.Oracle": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "AspNetCore.HealthChecks.Redis": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AspNetCore.HealthChecks.SqlServer": {
               "target": "Package",
               "version": "[9.0.0, )"
             },
@@ -67,7 +75,17 @@
               "target": "Package",
               "version": "[9.0.4, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
             "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[9.0.4, )"
             },
@@ -98,6 +116,10 @@
             "OpenTelemetry.Instrumentation.Runtime": {
               "target": "Package",
               "version": "[1.11.1, )"
+            },
+            "Oracle.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.23.23, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",
@@ -135,20 +157,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-              "version": "[10.0.2, 10.0.2]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[10.0.2, 10.0.2]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-              "version": "[10.0.2, 10.0.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -573,11 +581,6 @@
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
         }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
-        }
       }
     },
     "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Application\\MyApp.Application.csproj": {
@@ -656,20 +659,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-              "version": "[10.0.2, 10.0.2]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[10.0.2, 10.0.2]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-              "version": "[10.0.2, 10.0.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -950,11 +939,6 @@
             "System.Xml.XPath": "(,4.3.32767]",
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
         }
       }
     },
@@ -1008,20 +992,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-              "version": "[10.0.2, 10.0.2]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[10.0.2, 10.0.2]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-              "version": "[10.0.2, 10.0.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -1303,21 +1273,16 @@
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
         }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
-        }
       }
     },
-    "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\MyApp.Infrastructure.csproj": {
+    "d:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\MyApp.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\MyApp.Infrastructure.csproj",
+        "projectUniqueName": "d:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\MyApp.Infrastructure.csproj",
         "projectName": "MyApp.Infrastructure",
-        "projectPath": "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\MyApp.Infrastructure.csproj",
+        "projectPath": "d:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\MyApp.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\vigne\\.nuget\\packages\\",
-        "outputPath": "D:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\obj\\",
+        "outputPath": "d:\\Repositories\\aspnet-enterprise-api\\MyApp.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vigne\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1366,6 +1331,10 @@
               "target": "Package",
               "version": "[9.0.4, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "suppressParent": "All",
               "target": "Package",
@@ -1374,6 +1343,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[9.0.4, )"
+            },
+            "Oracle.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.23.23, )"
             },
             "Polly": {
               "target": "Package",
@@ -1395,20 +1368,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-              "version": "[10.0.2, 10.0.2]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[10.0.2, 10.0.2]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-              "version": "[10.0.2, 10.0.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -1689,11 +1648,6 @@
             "System.Xml.XPath": "(,4.3.32767]",
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
         }
       }
     }
