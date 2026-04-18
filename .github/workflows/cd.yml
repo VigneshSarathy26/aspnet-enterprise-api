@@ -1,0 +1,26 @@
+name: Deployment to ${{ github.ref_name }} Environment
+on:
+  push:
+    branches:
+      - dev
+      - main
+jobs:
+  dev-deploy:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    environment: development
+    permissions:
+      packages: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+  main-deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: Production
+    permissions:
+      packages: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
