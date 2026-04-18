@@ -1,0 +1,15 @@
+name: Build Docker Image and push to registry
+
+
+on:
+  push:
+    branches:
+      - dev
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
