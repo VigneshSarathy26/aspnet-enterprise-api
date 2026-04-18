@@ -1,4 +1,4 @@
-name: Deployment to ${{ github.ref_name }} Environment
+name: Deployment 
 on:
   push:
     branches:
