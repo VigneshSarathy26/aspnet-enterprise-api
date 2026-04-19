@@ -15,7 +15,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Linting
-        run: dotnet format --check --verbosity diagnostic
+        run: dotnet format MyApp.sln --check --verbosity diagnostic
 
   pre-commit:
     runs-on: ubuntu-latest
