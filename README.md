@@ -181,6 +181,27 @@ GET /api/v1/billing/aggregate?accountId=123456789012&from=2024-01-01&to=2024-02-
 
 ---
 
+
+## 🧹 Linting & Code Style
+
+This project enforces consistent C# code style and linting using an `.editorconfig` file at the root of the repository. Most modern IDEs (including Visual Studio, VS Code with C# Dev Kit, and Rider) will automatically respect these rules.
+
+### Linting with .NET CLI
+
+You can run code analysis and style checks from the command line:
+
+```bash
+# Analyze code style and quality for the entire solution
+dotnet format MyApp.sln --verify-no-changes
+
+# To automatically fix style issues:
+dotnet format MyApp.sln
+```
+
+> **Tip:**
+> - The `.editorconfig` file defines indentation, brace style, naming, and other C# conventions.
+> - For stricter linting, consider adding [StyleCop.Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers) or [Roslynator.Analyzers](https://github.com/JosefPihrt/Roslynator) to your projects.
+
 ## 🧪 Testing
 
 The solution is covered by an extensive test suite divided into Unit, Integration, and E2E flows.
