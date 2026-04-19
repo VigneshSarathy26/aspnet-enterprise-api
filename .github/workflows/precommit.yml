@@ -1,11 +1,23 @@
-name: Dependency Check
+name: codeQuality
 on:
   push:
     branches:
       - dev
 
 jobs:
-  dependency-check:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Dotnet setup
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+      - name: Linting
+        run: dotnet format --check --verbosity diagnostic
+
+  pre-commit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
