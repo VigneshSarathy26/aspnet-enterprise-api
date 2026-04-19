@@ -20,7 +20,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Linting
-        run: dotnet format MyApp.sln
+        run: dotnet format MyApp.sln --check --verbosity diagnostic
 
   pre-commit:
     runs-on: ubuntu-latest
@@ -37,5 +37,5 @@ jobs:
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
-           name: Depcheck report
+           name: dependency report
            path: ${{github.workspace}}/reports
