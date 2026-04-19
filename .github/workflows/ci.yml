@@ -35,3 +35,13 @@ jobs:
         with:
           push: true
           tags: ghcr.io/${{ env.REPOSITORY_NAME }}:latest
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          image-ref: 'ghcr.io/${{ env.REPOSITORY_NAME }}:latest'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
