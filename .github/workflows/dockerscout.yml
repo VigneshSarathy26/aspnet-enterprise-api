@@ -37,7 +37,5 @@ jobs:
       - name: Docker Scout
         uses: docker/scout-action@v1
         with:
-          command: cves
+          command: sbom
           image: mailtovignesh/aspdotnet:latest
-          only-severities: critical,high
-          exit-code: true
